@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveNow - Car Rental</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="logo">🚗 DriveNow</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#cars">Cars</a></li>
+        <li><a href="#booking">Booking</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+<!-- Home -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>Rent Your Dream Car</h1>
+        <p>Choose your car, select your dates and hit the road.</p>
+
+        <a href="#cars" class="btn">Browse Cars</a>
+    </div>
+</section>
+
+
+<!-- Cars -->
+<section id="cars" class="cars-section">
+
+    <h2>Our Cars</h2>
+
+    <p class="section-text">
+        Choose from our collection of premium and affordable vehicles.
+    </p>
+
+    <!-- Filters -->
+    <div class="filters">
+        <button onclick="filterCars('all')">All</button>
+        <button onclick="filterCars('Sedan')">Sedan</button>
+        <button onclick="filterCars('SUV')">SUV</button>
+        <button onclick="filterCars('Sports')">Sports</button>
+        <button onclick="filterCars('Luxury')">Luxury</button>
+    </div>
+
+
+    <!-- Car List -->
+    <div class="car-container" id="carContainer">
+
+        <div class="car-card" data-category="Sedan">
+            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&q=80">
+
+            <div class="car-info">
+                <h3>Toyota Camry</h3>
+                <p>Comfortable and reliable sedan.</p>
+                <h4>₹3,000 / day</h4>
+
+                <button onclick="selectCar('Toyota Camry', 3000, 'Sedan', 'https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&q=80')">
+                    Select This Car
+                </button>
+            </div>
+        </div>
+
+
+        <div class="car-card" data-category="SUV">
+            <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80">
+
+            <div class="car-info">
+                <h3>Range Rover</h3>
+                <p>Powerful SUV for comfortable journeys.</p>
+                <h4>₹5,000 / day</h4>
+
+                <button onclick="selectCar('Range Rover', 5000, 'SUV', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80')">
+                    Select This Car
+                </button>
+            </div>
+        </div>
+
+
+        <div class="car-card" data-category="Sports">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80">
+
+            <div class="car-info">
+                <h3>Porsche 911</h3>
+                <p>Fast and stylish sports car.</p>
+                <h4>₹8,000 / day</h4>
+
+                <button onclick="selectCar('Porsche 911', 8000, 'Sports', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80')">
+                    Select This Car
+                </button>
+            </div>
+        </div>
+
+
+        <div class="car-card" data-category="Luxury">
+            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80">
+
+            <div class="car-info">
+                <h3>Mercedes Benz</h3>
+                <p>Premium luxury car for special trips.</p>
+                <h4>₹7,000 / day</h4>
+
+                <button onclick="selectCar('Mercedes Benz', 7000, 'Luxury', 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80')">
+                    Select This Car
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Booking -->
+<section id="booking" class="booking-section">
+
+    <h2>Complete Your Booking</h2>
+
+    <p class="section-text">
+        Select your dates and check the rental price.
+    </p>
+
+
+    <div class="booking-container">
+
+        <!-- Selected Car -->
+        <div class="selected-car">
+
+            <img id="selectedCarImage"
+                 src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=800&q=80">
+
+            <h3 id="selectedCarName">No car selected</h3>
+
+            <p id="selectedCarDescription">
+                Please select a car from the catalog.
+            </p>
+
+            <h2 id="priceDisplay">₹0 / day</h2>
+
+        </div>
+
+
+        <!-- Booking Form -->
+        <div class="booking-form">
+
+            <label>Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+
+
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter phone number">
+
+
+            <label>From Date</label>
+            <input type="date" id="fromDate" onchange="calculatePrice()">
+
+
+            <label>To Date</label>
+            <input type="date" id="toDate" onchange="calculatePrice()">
+
+
+            <label>Pickup Location</label>
+
+            <select id="location">
+                <option value="">Select location</option>
+                <option>Vijayawada</option>
+                <option>Visakhapatnam</option>
+                <option>Hyderabad</option>
+                <option>Chennai</option>
+                <option>Bangalore</option>
+            </select>
+
+
+            <div class="price-box">
+
+                <p>
+                    Price per day:
+                    <span id="dailyPrice">₹0</span>
+                </p>
+
+                <p>
+                    Number of days:
+                    <span id="numberOfDays">0</span>
+                </p>
+
+                <h3>
+                    Total:
+                    <span id="totalPrice">₹0</span>
+                </h3>
+
+            </div>
+
+
+            <button class="order-btn" onclick="bookCar()">
+                Order Now
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Contact -->
+<section id="contact" class="contact-section">
+
+    <h2>Contact Us</h2>
+
+    <p>📞 Phone: +91 98765 43210</p>
+    <p>📧 Email: drivenow@example.com</p>
+    <p>📍 Location: Vijayawada, Andhra Pradesh</p>
+
+</section>
+
+
+<!-- Success Message -->
+<div id="successMessage" class="success-message">
+
+    <div class="success-box">
+
+        <span class="close" onclick="closeSuccess()">×</span>
+
+        <h2>Booking Successful! 🚗</h2>
+
+        <p>Your car has been reserved.</p>
+
+        <button onclick="closeSuccess()">OK</button>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <h3>DriveNow Car Rentals</h3>
+    <p>Affordable cars. Easy booking. Great journeys.</p>
+    <p>© 2026 DriveNow. All rights reserved.</p>
+</footer>
+
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
